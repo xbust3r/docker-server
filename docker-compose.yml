@@ -1,0 +1,31 @@
+version: '3'
+services:
+  mysql:
+    image: mariadb:10.5.12
+    container_name: services_mysql
+    ports:
+      - "3306:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: 123456
+    volumes:
+      - ./data/mysql:/var/lib/mysql
+
+  mongodb:
+    image: tutum/mongodb:3.0
+    container_name: services_mongodb
+    environment:
+      - AUTH=no
+    ports:
+      - "27017:27017"
+
+  redis:
+    image: redis:2.8
+    container_name: services_redis
+    ports:
+      - "6379:6379"
+
+networks:
+  default:
+    external:
+      name: $DOCKER_NETWORK
+ 
